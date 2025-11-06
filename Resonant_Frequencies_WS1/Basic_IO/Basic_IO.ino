@@ -1,5 +1,4 @@
-
-// Simple example of playing a fixed MIDI note in a tempo based on the level of a potentiometer ( sensor);
+// Simple example of playing a fixed MIDI note in a tempo based on a fixed value
 //by Michel Gutlich for the Resonant Frequencies workshop #1
 
 #define LED_BUILTIN 3. // A led is attached to pin 3 to have some visual indication of what is happening
@@ -12,7 +11,7 @@ MIDI_CREATE_DEFAULT_INSTANCE(); //Create a standard instance of a hardware Seria
 
 int tempo = 500; // Declare the variable 'tempo' and give it the initial value of 1024;
 
-int channel = 14; //The MIDI channel we are going to send messages to. Make this the channel number your synthesizer is set on.
+int channel = 1; //The MIDI channel we are going to send messages to. Make this the channel number your synthesizer is set on.
 
 int note = 42; //The note number we are going send
 

@@ -34,7 +34,7 @@ void handleClock() {
 
     if (click == step) {
 
-      velocity = analogRead(A1) / velScale;  // Read analog port A1 and put the value in the parameter velocity. The value will be between 0 and 1023 zo we have to divide it by a scale factor to be in range
+      velocity = analogRead(VELOCITYPIN) / velScale;  // Read analog port A1 and put the value in the parameter velocity. The value will be between 0 and 1023 zo we have to divide it by a scale factor to be in range
 
       note = setScale(random(12), scale, transpose);  //Choose a random note number between 0 and 127, scale it and transpose it
 
