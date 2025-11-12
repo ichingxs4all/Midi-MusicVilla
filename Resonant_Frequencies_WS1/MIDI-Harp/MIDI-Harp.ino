@@ -1,7 +1,7 @@
 //Simple example to use a distance sensor as a way of playing notes
 //Made by Michel Gutlich for the Resonant Frequencies WS #1 
 
-#define LED_BUILTIN 3
+//#define LED_BUILTIN 3
 #define VELOCITYPIN A1
 
 //Include the FortySevenEffects MIDI library through the library manager
@@ -66,7 +66,7 @@ void setup() {
 
 void loop() {
   MIDI.read();
-  velocity = map(analogRead( VELOCITYPIN), 0 , 1023 , 0 , 127);
+  //velocity = map(analogRead( VELOCITYPIN), 0 , 1023 , 0 , 127);
 
   VL53L0X_RangingMeasurementData_t measure;
 
