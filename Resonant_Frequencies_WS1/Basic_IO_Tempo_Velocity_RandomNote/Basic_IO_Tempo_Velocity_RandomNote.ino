@@ -1,10 +1,10 @@
+// Simple example of playing a random MIDI note on channel 1 in a tempo based on the level of a potentiometer ( sensor) connected to A0
+// The velocity or loudness is controlled by a lightsensor connected to A1
+// by Michel Gutlich for the Resonant Frequencies workshop #1
 
-// Simple example of playing a fixed MIDI note in a tempo based on the level of a potentiometer ( sensor) connected to A0
-//by Michel Gutlich for the Resonant Frequencies workshop #1
-
-#define LED_BUILTIN 3. // A led is attached to pin 3 to have some visual indication of what is happening
-#define SENSORPIN A0
-#define VELOCITYPIN A1
+#define LED_BUILTIN 3 // A led is attached to pin 3 to have some visual indication of what is happening
+#define SENSORPIN A0 //A potentiometer is connected to A0
+#define VELOCITYPIN A1 //A lightsensor is connected to A1
 
 // We are goin to use the FortySevenEffects MIDI library. Make sure it downloaded and installed through the Library Manager
 //https://github.com/FortySevenEffects/arduino_midi_library
@@ -12,7 +12,7 @@
 
 MIDI_CREATE_DEFAULT_INSTANCE(); //Create a standard instance of a hardware Serial Port MIDI device
 
-int tempo = 500; // Declare the variable 'tempo' and give it the initial value of 1024;
+int tempo = 500; // Declare the variable 'tempo' and give it the initial value of 500;
 
 int channel = 14; //The MIDI channel we are going to send messages to. Make this the channel number your synthesizer is set on. Channel numbers are between 1 and 16
 
@@ -22,11 +22,11 @@ int velocity = 100; //The velocity ( volume) of the note we are going to send. V
 
 int velScale = 4; // scale factor for the velocity readings
 
-bool debug = true; //Set this to false to turn off debugging to the USB serial port
+bool debug = false; //Set this to false to turn off debugging to the USB serial port
 
 void setup()
 {
-    Serial.begin(115200); //Setup the USB serial port for debugging
+    if(debug)Serial.begin(115200); //Setup the USB serial port for debugging
 
     pinMode(LED_BUILTIN, OUTPUT);    //Set the pin where the led is attached to as an output
     MIDI.begin(MIDI_CHANNEL_OMNI);   // Launch MIDI and listen on all channels

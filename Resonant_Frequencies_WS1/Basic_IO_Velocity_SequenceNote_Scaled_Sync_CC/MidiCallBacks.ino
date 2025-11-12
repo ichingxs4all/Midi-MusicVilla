@@ -38,7 +38,7 @@ void handleClock() {
       velocity = analogRead(VELOCITYPIN) / velScale;  // Read analog port A1 and put the value in the parameter velocity. The value will be between 0 and 1023 zo we have to divide it by a scale factor to be in range
 
       if (randomiserOn == 1) {                                    //Check if the touch button is touched to enable the randomiser
-        int notePlayed = setScale(random(12), scale, transpose);  // Calculate a random note in a range , on a certain scale and with an amount of transposition
+        int notePlayed = setScale(random(range), scale, transpose);  // Calculate a random note in a range , on a certain scale and with an amount of transposition
         handleNoteOn(channel, notePlayed, velocity);              //Play the calculated note
         lastNotePlayed = notePlayed;                              //Store the last note played
       } else {

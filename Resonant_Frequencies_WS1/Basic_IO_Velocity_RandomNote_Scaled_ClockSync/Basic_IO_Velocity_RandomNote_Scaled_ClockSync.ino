@@ -1,5 +1,4 @@
-
-// Simple example of playing a fixed MIDI note in a tempo based on the level of a potentiometer ( sensor);
+// Simple example of playing a random MIDI note on channel 1 in a certain scale in a tempo based on an external MIDI clock
 //by Michel Gutlich for the Resonant Frequencies workshop #1
 
 #define LED_BUILTIN 3 // A led is attached to pin 3 to have some visual indication of what is happening
@@ -20,7 +19,7 @@ int velocity = 100;  //The velocity ( volume) of the note we are going to send. 
 
 int velScale = 4;  // scale factor for the velocity readings
 
-bool debug = true;  //Set this to false to turn off debugging to the USB serial port
+bool debug = false;  //Set this to false to turn off debugging to the USB serial port
 
 int numNotesInScale;  //This will hold the number of notes in a scale
 

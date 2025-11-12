@@ -1,9 +1,10 @@
-// Simple example of playing a random  MIDI note on a certain scale and in a tempo based on MIDI clock sync. The level of a potentiometer ( sensor) controls aa control change parameter;
-//by Michel Gutlich for the Resonant Frequencies workshop #1
+// Simple example of playing a random  MIDI note on a certain scale and in a tempo based on MIDI clock sync. 
+// The level of a potentiometer ( sensor) controls a control change parameter of the synth
+// by Michel Gutlich for the Resonant Frequencies workshop #1
 
 #define LED_BUILTIN 3  // A led is attached to pin 3 to have some visual indication of what is happening
-#define SENSORPIN A0 //The analog port used for reading the analog sensor
-#define VELOCITYPIN A1
+#define SENSORPIN A0 // The potentiometer is connected to A0
+#define VELOCITYPIN A1 //The lightsensor is connected to A1
 
 // We are goin to use the FortySevenEffects MIDI library. Make sure it downloaded and installed through the Library Manager
 //https://github.com/FortySevenEffects/arduino_midi_library
@@ -19,11 +20,13 @@ int velocity = 100;  //The velocity ( volume) of the note we are going to send. 
 
 int velScale = 4;  // scale factor for the velocity readings
 
-bool debug = true;  //Set this to false to turn off debugging to the USB serial port
+bool debug = false;  //Set this to false to turn off debugging to the USB serial port
 
 int numNotesInScale;  //This will hold the number of notes in a scale
 
 int scale = 1;  //This parameter will set the type of scale , 0 = chromatic, 1 = pentatatonic and 2 = blues scale
+int range = 12; //The range of the random note to choose from
+int transpose = 24; //The amount of notes transposed according to the root note choosen by random
 
 int playing;  //This will hold a temporary value of the note  that is selected for playing after mapping it to a scale
 
@@ -38,8 +41,6 @@ int gateLength = 50; //This holds the gate length of the notes we are playing
 int lastNotePlayed; //This will hold the last note played
 
 long clock_timer; //This will store our clock timer value
-
-int transpose = 24; //The amount of notes transposed according to the root note
 
 int ccNo = 105; //This holds the control change number of the parameter of the synth we are going to change
 

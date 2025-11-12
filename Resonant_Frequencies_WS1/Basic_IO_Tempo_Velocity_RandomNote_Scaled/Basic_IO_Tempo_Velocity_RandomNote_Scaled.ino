@@ -1,10 +1,10 @@
-
-// Simple example of playing a fixed MIDI note in a tempo based on the level of a potentiometer ( sensor) attached to A0;
+// Simple example of playing a random  MIDI note in a certain scale on channel 1 in a tempo based on the level of a potentiometer ( sensor) attached to A0;
+//The velocity or loudness is controlled by a lightsensor connected to A1
 //by Michel Gutlich for the Resonant Frequencies workshop #1
 
 #define LED_BUILTIN 3 // A led is attached to pin 3 to have some visual indication of what is happening
-#define SENSORPIN A0
-#define VELOCITYPIN A1
+#define SENSORPIN A0 //A potentiomter connected to A0
+#define VELOCITYPIN A1 //A lightsensor connected to A1
 
 // We are goin to use the FortySevenEffects MIDI library. Make sure it downloaded and installed through the Library Manager
 //https://github.com/FortySevenEffects/arduino_midi_library
@@ -12,7 +12,7 @@
 
 MIDI_CREATE_DEFAULT_INSTANCE(); //Create a standard instance of a hardware Serial Port MIDI device
 
-int tempo = 500; // Declare the variable 'tempo' and give it the initial value of 1024;
+int tempo = 500; // Declare the variable 'tempo' and give it the initial value of 500 mSec;
 
 int channel = 1; //The MIDI channel we are going to send messages to. Make this the channel number your synthesizer is set on. Channel numbers are between 1 and 16
 
@@ -22,11 +22,14 @@ int velocity = 100; //The velocity ( volume) of the note we are going to send. V
 
 int velScale = 4; // scale factor for the velocity readings
 
-bool debug = true; //Set this to false to turn off debugging to the USB serial port
+bool debug = false; //Set this to false to turn off debugging to the USB serial port
 
 int numNotesInScale; //This will hold the number of notes in a scale 
 
 int scale = 1 ; //This parameter will set the type of scale , 0 = chromatic, 1 = pentatatonic and 2 = blues scale
+int range = 12; //The range of the random notes to be selected
+int transpose = 32; //Transpose the range to a certain place on the scale
+
 
 int playing; //This will hold a temporary value of the note  that is selected for playing after mapping it to a scale
 
@@ -46,7 +49,7 @@ void loop()
 
     velocity = analogRead(VELOCITYPIN)/velScale; // Read analog port A1 and put the value in the parameter velocity. The value will be between 0 and 1023 zo we have to divide it by a scale factor to be in range
 
-    note = setScale(random(12), 2, 32); //Choose a random note number between 0 and 127, scale it and transpose it 
+    note = setScale(random(range), scale, transpose); //Choose a random note number between 0 and 127, scale it and transpose it 
     
     if(debug) Serial.println(note); //Send the value to the USB Serial portfor debugging if the boolean 'debug' is true
 
