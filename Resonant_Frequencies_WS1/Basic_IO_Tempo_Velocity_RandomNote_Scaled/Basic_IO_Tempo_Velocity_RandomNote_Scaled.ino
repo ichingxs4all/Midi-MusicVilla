@@ -18,7 +18,7 @@ int channel = 1; //The MIDI channel we are going to send messages to. Make this 
 
 int note = 42; //The note number we are going send. Note numbers are between 0 and 127
 
-int velocity = 100; //The velocity ( volume) of the note we are going to send. Velocty value are between 0 and 127 
+int velocity = 127; //The velocity ( volume) of the note we are going to send. Velocty value are between 0 and 127 
 
 int velScale = 4; // scale factor for the velocity readings
 
@@ -30,8 +30,7 @@ int scale = 1 ; //This parameter will set the type of scale , 0 = chromatic, 1 =
 int range = 12; //The range of the random notes to be selected
 int transpose = 32; //Transpose the range to a certain place on the scale
 
-
-int playing; //This will hold a temporary value of the note  that is selected for playing after mapping it to a scale
+int playing; //This will hold the last note played
 
 void setup()
 {
@@ -39,6 +38,7 @@ void setup()
 
     pinMode(LED_BUILTIN, OUTPUT);    //Set the pin where the led is attached to as an output
     MIDI.begin(MIDI_CHANNEL_OMNI);   // Launch MIDI and listen on all channels
+    analogReference(EXTERNAL); //Set the analog reference to external so we can use 3.3 volts as a reference. A wire must be connected from the ARef pin to 3.3V
 }
 
 void loop()
@@ -66,3 +66,7 @@ void loop()
     delay(tempo/2);	        // Wait for half time the tempo ( in mSec)
     
 }
+
+//Experiments:
+//Play random chords in a certain scale
+//Extend the scales with one of your own

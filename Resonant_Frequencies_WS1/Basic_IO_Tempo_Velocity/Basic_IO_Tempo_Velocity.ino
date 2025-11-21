@@ -1,6 +1,6 @@
 // Simple example of playing a fixed MIDI note on channel 1 in a tempo based on the level of a potentiometer ( sensor) connected to A0;
 //The velocity or loudness of the note is based on the value of lightsensor connected to A1
-//by Michel Gutlich for the Resonant Frequencies workshop #1
+//by Michel Gutlich for the Resonant Frequencies workshop #2
 
 #define LED_BUILTIN 3 // A led is attached to pin 3 to have some visual indication of what is happening
 #define SENSORPIN A0 //A potentiometer is connected to A0
@@ -24,6 +24,7 @@ void setup()
 {
     pinMode(LED_BUILTIN, OUTPUT);    //Set the pin where the led is attached to as an output
     MIDI.begin(MIDI_CHANNEL_OMNI);   // Launch MIDI and listen on all channels
+    analogReference(EXTERNAL); //Set the analog reference to external so we can use 3.3 volts as a reference. A wire must be connected from the ARef pin to 3.3V
 }
 
 void loop()
@@ -33,7 +34,7 @@ void loop()
     tempo = analogRead(SENSORPIN); // Read analog port A0 and put the value in the parameter tempo. The value will be between 0 and 1023
 
     velocity = analogRead(VELOCITYPIN)/10 ; // Read analog port A1 and put the value in the parameter velocity. The value will be between 0 and 1023 zo we have to divide it by 10 to be in range
-    
+   
     digitalWrite(LED_BUILTIN, HIGH); //Turn the led on
     
     MIDI.sendNoteOn(note, velocity, channel);    // Send the note with a velocity on a channel
@@ -47,3 +48,8 @@ void loop()
     delay(tempo/2);	        // Wait for half time the tempo ( in mSec)
     
 }
+
+//Experiments:
+//Make the note a random one 
+//Make the note a value defined by the light sensor
+//Make the tempo a value defined by the light sensor

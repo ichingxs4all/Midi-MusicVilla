@@ -14,11 +14,11 @@ MIDI_CREATE_DEFAULT_INSTANCE(); //Create a standard instance of a hardware Seria
 
 int tempo = 500; // Declare the variable 'tempo' and give it the initial value of 500;
 
-int channel = 14; //The MIDI channel we are going to send messages to. Make this the channel number your synthesizer is set on. Channel numbers are between 1 and 16
+int channel = 1; //The MIDI channel we are going to send messages to. Make this the channel number your synthesizer is set on. Channel numbers are between 1 and 16
 
 int note = 42; //The note number we are going send. Note numbers are between 0 and 127
 
-int velocity = 100; //The velocity ( volume) of the note we are going to send. Velocty value are between 0 and 127 
+int velocity = 126; //The velocity ( volume) of the note we are going to send. Velocty value are between 0 and 127 
 
 int velScale = 4; // scale factor for the velocity readings
 
@@ -30,6 +30,7 @@ void setup()
 
     pinMode(LED_BUILTIN, OUTPUT);    //Set the pin where the led is attached to as an output
     MIDI.begin(MIDI_CHANNEL_OMNI);   // Launch MIDI and listen on all channels
+    analogReference(EXTERNAL); //Set the analog reference to external so we can use 3.3 volts as a reference. A wire must be connected from the ARef pin to 3.3V
 }
 
 void loop()
@@ -40,7 +41,7 @@ void loop()
 
     velocity = analogRead(VELOCITYPIN)/velScale; // Read analog port A1 and put the value in the parameter velocity. The value will be between 0 and 1023 zo we have to divide it by a scale factor to be in range
 
-    note = random(127); //Choose a random note number between 0 and 127
+    note = random(60,100); //Choose a random note number between 60 and 100
     
     if(debug) Serial.println(velocity); //Send the value to the USB Serial port
 
@@ -57,3 +58,9 @@ void loop()
     delay(tempo/2);	        // Wait for half time the tempo ( in mSec)
     
 }
+
+//Experiments:
+//Make the range of the random notes controlable by the potmeter
+//Play two notes in a random interval
+//Make the gatelength variabel with the potmeter
+

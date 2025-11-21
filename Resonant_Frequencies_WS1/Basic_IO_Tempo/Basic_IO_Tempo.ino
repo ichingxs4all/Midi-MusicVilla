@@ -23,6 +23,7 @@ void setup()
 {
     pinMode(LED_BUILTIN, OUTPUT);    //Set the pin where the led is attached to as an output
     MIDI.begin(MIDI_CHANNEL_OMNI);   // Launch MIDI and listen on all channels
+    analogReference(EXTERNAL); //Set the analog reference to external so we can use 3.3 volts as a reference. A wire must be connected from the ARef pin to 3.3V
 }
 
 void loop()
