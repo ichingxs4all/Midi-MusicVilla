@@ -1,4 +1,5 @@
 //Simple example of blinking a led in a rhythm of 1 second
+// The led is connected to D3 on the Grove shield
 //By Michel Gutlich for the workshop Resonant Frequencies #2
 
 #define LED_BUILTIN 3
