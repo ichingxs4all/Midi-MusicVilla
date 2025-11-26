@@ -20,6 +20,8 @@ int note = 42; //The note number we are going send ( range = 0 - 127 )
 
 int velocity = 100; //The initial velocity ( volume) of the note we are going to send ( range = 0 - 127 )
 
+int ccNo = 16; //The control change number to use  
+
 void setup()
 {
     pinMode(LED_BUILTIN, OUTPUT);    //Set the pin where the led is attached to as an output
@@ -53,3 +55,6 @@ void loop()
 //Make the note a random one 
 //Make the note a value defined by the light sensor
 //Make the tempo a value defined by the light sensor
+//
+// Send a control change according to the lightsensor
+// Use MIDI.sendControlChange(ccNo, velocity, channel);
